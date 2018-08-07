@@ -1,11 +1,10 @@
 package com.example.usercenter.presenter
 
+import com.example.baselibrary.ext.execute
 import com.example.baselibrary.precenter.BasePresenter
+import com.example.baselibrary.rx.BaseSubscribe
 import com.example.usercenter.presenter.view.RegistView
 import com.example.usercenter.service.impl.UserServiceImp
-import rx.Subscriber
-import rx.android.schedulers.AndroidSchedulers
-import rx.schedulers.Schedulers
 
 /**
  * Created by lc on 2018/8/6.
@@ -16,21 +15,13 @@ class RegistPresenter : BasePresenter<RegistView>() {
 
         var userService = UserServiceImp()
         userService.register(mobile, pwd, verifyCode)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : Subscriber<Boolean>() {
+                .execute(object : BaseSubscribe<Boolean>() {
                     override fun onNext(t: Boolean) {
+                        super.onNext(t)
                         mView.onRegistResult(t)
-
                     }
-
-                    override fun onCompleted() {
-                    }
-
-                    override fun onError(e: Throwable?) {
-                    }
-
                 })
+
 
     }
 }

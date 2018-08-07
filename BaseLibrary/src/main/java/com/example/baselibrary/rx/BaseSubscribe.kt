@@ -5,8 +5,10 @@ import rx.Subscriber
 /**
  * Created by lc on 2018/8/7.
  */
-class BaseSubscribe<T> : Subscriber<T>() {
+open class BaseSubscribe<T> : Subscriber<T>() {
     override fun onNext(t: T) {
+
+
     }
 
     override fun onCompleted() {
