@@ -5,6 +5,7 @@ if (isUserCenter.toBoolean()) {
 }
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 
 android {
@@ -53,4 +54,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation "org.jetbrains.anko:anko-commons:$anko_version"
     implementation project(':BaseLibrary')
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+
 }

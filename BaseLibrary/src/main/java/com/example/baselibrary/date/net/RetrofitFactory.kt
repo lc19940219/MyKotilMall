@@ -37,8 +37,6 @@ class RetrofitFactory private constructor() {
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(initClient())
                 .build()
-
-
     }
 
     private fun initClient(): OkHttpClient? {

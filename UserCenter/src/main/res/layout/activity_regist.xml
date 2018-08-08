@@ -12,6 +12,7 @@
         android:orientation="horizontal">
 
         <EditText
+            android:id="@+id/mMobile"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="1"
@@ -25,11 +26,13 @@
     </LinearLayout>
 
     <EditText
+        android:id="@+id/mVerifyCode"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:hint="输入验证码" />
 
     <EditText
+        android:id="@+id/mPw"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:hint="输入密码" />

@@ -3,6 +3,8 @@ package com.example.usercenter.ui.activity
 import android.os.Bundle
 import com.example.baselibrary.ui.activity.BaseMVPActivity
 import com.example.usercenter.R
+import com.example.usercenter.injection.compontent.DaggerUserCompontent
+import com.example.usercenter.injection.moudle.UserModule
 import com.example.usercenter.presenter.RegistPresenter
 import com.example.usercenter.presenter.view.RegistView
 import kotlinx.android.synthetic.main.activity_regist.*
@@ -20,11 +22,24 @@ class RegistActivity : BaseMVPActivity<RegistPresenter>(), RegistView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_regist)
-        presenter = RegistPresenter()
-        presenter.mView = this
+        // presenter = RegistPresenter()
+
+        initInjection()
+
         mRegistBtn.setOnClickListener {
-            presenter.regist("123", "123","13")
+            presenter.regist(mMobile.toString(),
+                    mVerifyCode.toString(),
+                    mPw.toString())
+
+//            presenter.regist("123456",
+//                    "123456",
+//                    "123456")
         }
 
+    }
+
+    private fun initInjection() {
+        DaggerUserCompontent.builder().userModule(UserModule()).build().inject(this)
+        presenter.mView = this
     }
 }
