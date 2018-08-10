@@ -5,6 +5,7 @@ import com.example.baselibrary.common.BaseApplication
 import com.example.baselibrary.injection.compontent.ActivityCompontent
 import com.example.baselibrary.injection.compontent.DaggerActivityCompontent
 import com.example.baselibrary.injection.module.ActivityModule
+import com.example.baselibrary.injection.module.LifeModule
 import com.example.baselibrary.precenter.BasePresenter
 import com.example.baselibrary.precenter.view.BaseView
 import javax.inject.Inject
@@ -34,7 +35,7 @@ open class BaseMVPActivity<T : BasePresenter<*>> : BaseActivity(), BaseView {
     private fun initActivityInjection() {
         activityCompontent = DaggerActivityCompontent.builder()
                 .appCompontent((application as BaseApplication).appCompontent)
-                .activityModule(ActivityModule(this)).build()
+                .activityModule(ActivityModule(this)).lifeModule(LifeModule(this)).build()
 
     }
 }

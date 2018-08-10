@@ -23,7 +23,7 @@ class RegistPresenter @Inject constructor() : BasePresenter<RegistView>() {
                         super.onNext(t)
                         mView.onRegistResult(t)
                     }
-                })
+                }, lifecycleProvider)
 
 
     }
