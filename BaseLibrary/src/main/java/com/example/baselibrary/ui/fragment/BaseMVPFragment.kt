@@ -1,4 +1,4 @@
-package com.example.baselibrary.ui.activity
+package com.example.baselibrary.ui.fragment
 
 import android.os.Bundle
 import com.example.baselibrary.common.BaseApplication
@@ -13,7 +13,7 @@ import javax.inject.Inject
 /**
  * Created by lc on 2018/8/6.
  */
-open abstract class BaseMVPActivity<T : BasePresenter<*>> : BaseActivity(), BaseView {
+open abstract class BaseMVPFragment<T : BasePresenter<*>> : BaseFragment(), BaseView {
     @Inject
     lateinit var presenter: T
 
@@ -36,8 +36,8 @@ open abstract class BaseMVPActivity<T : BasePresenter<*>> : BaseActivity(), Base
     abstract fun initComponent()
     private fun initActivityInjection() {
         activityCompontent = DaggerActivityCompontent.builder()
-                .appCompontent((application as BaseApplication).appCompontent)
-                .activityModule(ActivityModule(this)).lifeModule(LifeModule(this)).build()
+                .appCompontent((activity!!.application as BaseApplication).appCompontent)
+                .activityModule(ActivityModule(activity!!)).lifeModule(LifeModule(this)).build()
 
     }
 }
