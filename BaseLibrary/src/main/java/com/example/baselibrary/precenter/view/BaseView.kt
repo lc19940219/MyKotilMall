@@ -6,5 +6,5 @@ package com.example.baselibrary.precenter.view
 interface BaseView {
     fun showLoading()
     fun hideLoading()
-    fun onError()
+    fun onError(text: String)
 }

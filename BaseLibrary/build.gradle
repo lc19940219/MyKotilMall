@@ -27,8 +27,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     testImplementation 'junit:junit:4.12'
@@ -38,8 +37,10 @@ dependencies {
 
     // Anko Commons
     implementation "org.jetbrains.anko:anko-commons:$anko_version"
+
     // Appcompat-v7 (only Anko Commons)
     implementation "org.jetbrains.anko:anko-appcompat-v7-commons:$anko_version"
+
     // Support-v4 (only Anko Commons)
     implementation "org.jetbrains.anko:anko-support-v4-commons:$anko_version"
 
@@ -61,6 +62,10 @@ dependencies {
     //RxLifecycle
     compile "com.trello:rxlifecycle-kotlin:$rx_lifecycle_version"
     compile "com.trello:rxlifecycle-components:$rx_lifecycle_version"
+    implementation 'com.android.support:recyclerview-v7:27.1.1'
+//Glide
+    compile "com.github.bumptech.glide:glide:$glide_version"
+
 }
 
 

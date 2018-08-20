@@ -8,6 +8,7 @@ import com.example.baselibrary.injection.module.ActivityModule
 import com.example.baselibrary.injection.module.LifeModule
 import com.example.baselibrary.precenter.BasePresenter
 import com.example.baselibrary.precenter.view.BaseView
+import org.jetbrains.anko.support.v4.toast
 import javax.inject.Inject
 
 /**
@@ -24,7 +25,8 @@ open abstract class BaseMVPFragment<T : BasePresenter<*>> : BaseFragment(), Base
     override fun hideLoading() {
     }
 
-    override fun onError() {
+    override fun onError(text:String) {
+        toast(text)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

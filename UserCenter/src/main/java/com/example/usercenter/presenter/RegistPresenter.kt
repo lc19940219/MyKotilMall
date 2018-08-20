@@ -17,8 +17,12 @@ class RegistPresenter @Inject constructor() : BasePresenter<RegistView>() {
     fun regist(mobile: String, verifyCode: String, pwd: String) {
 
 //        var userService = UserServiceImp()
+        if (!checkNetWork()) {
+            return
+        }
+        mView.showLoading()
         userService.register(mobile, pwd, verifyCode)
-                .execute(object : BaseSubscribe<Boolean>() {
+                .execute(object : BaseSubscribe<Boolean>(mView) {
                     override fun onNext(t: Boolean) {
                         super.onNext(t)
                         if (t) {

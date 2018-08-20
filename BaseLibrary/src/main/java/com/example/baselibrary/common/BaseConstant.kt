@@ -6,5 +6,6 @@ package com.example.baselibrary.common
 class BaseConstant {
     companion object {
         val SERVICE_ADDRESS = "http:192.168.12.172:8080"
+        val TABLE_PREFS = "KotlinMall"
     }
 }
