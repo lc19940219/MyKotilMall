@@ -1,8 +1,10 @@
 package com.example.usercenter.ui.activity
 
 import android.os.Bundle
+import android.view.View
 import com.example.baselibrary.common.AppManager
 import com.example.baselibrary.ext.click
+import com.example.baselibrary.ext.enable
 import com.example.baselibrary.ui.activity.BaseMVPActivity
 import com.example.usercenter.R
 import com.example.usercenter.injection.compontent.DaggerUserCompontent
@@ -12,7 +14,18 @@ import com.example.usercenter.presenter.view.RegistView
 import kotlinx.android.synthetic.main.activity_regist.*
 import org.jetbrains.anko.toast
 
-class RegistActivity : BaseMVPActivity<RegistPresenter>(), RegistView {
+class RegistActivity : BaseMVPActivity<RegistPresenter>(), RegistView, View.OnClickListener {
+    override fun onClick(v: View) {
+        when (v.id) {
+            R.id.mVerifyCodeBtn -> {
+                mVerifyCodeBtn.requestSendVerifyNumber()
+                toast("发送验证成功")
+            }
+            R.id.mRegisterBtn -> {
+                presenter.regist(mMobileEt.text.toString(),  mVerifyCodeEt.text.toString(),mPwdEt.text.toString())
+            }
+        }
+    }
 
     private var pressTime: Long = 0
 
@@ -31,13 +44,20 @@ class RegistActivity : BaseMVPActivity<RegistPresenter>(), RegistView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_regist)
+        initview()
 
-        mRegistBtn.click {
-            presenter.regist(mMobile.text.toString(),
-                    mVerifyCode.text.toString(),
-                    mPw.text.toString())
-        }
-        verifybutton.click { verifybutton.requestSendVerifyNumber() }
+
+    }
+
+    private fun initview() {
+
+        mRegisterBtn.enable(mMobileEt, { isBtnEnable() })
+        mRegisterBtn.enable(mVerifyCodeEt, { isBtnEnable() })
+        mRegisterBtn.enable(mPwdEt, { isBtnEnable() })
+        mRegisterBtn.enable(mPwdConfirmEt, { isBtnEnable() })
+
+        mVerifyCodeBtn.click(this)
+        mRegisterBtn.click(this)
 
     }
 
@@ -52,4 +72,10 @@ class RegistActivity : BaseMVPActivity<RegistPresenter>(), RegistView {
         }
     }
 
+    private fun isBtnEnable(): Boolean {
+        return mMobileEt.text.isNullOrEmpty().not() &&
+                mVerifyCodeEt.text.isNullOrEmpty().not() &&
+                mPwdEt.text.isNullOrEmpty().not() &&
+                mPwdConfirmEt.text.isNullOrEmpty().not()
+    }
 }

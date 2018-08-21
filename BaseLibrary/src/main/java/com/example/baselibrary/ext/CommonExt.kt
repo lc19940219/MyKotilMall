@@ -1,10 +1,13 @@
 package com.example.baselibrary.ext
 
 import android.view.View
+import android.widget.Button
+import android.widget.EditText
 import com.example.baselibrary.date.protocol.BaseResp
 import com.example.baselibrary.rx.BaseFunc
 import com.example.baselibrary.rx.BaseFuncToBoolean
 import com.example.baselibrary.rx.BaseSubscribe
+import com.example.baselibrary.widgets.DefaultTextWatcher
 import com.trello.rxlifecycle.LifecycleProvider
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
@@ -45,4 +48,14 @@ fun View.click(listener: View.OnClickListener) {
 fun View.click(method: () -> Unit) {
     setOnClickListener { method() }
 
+}
+
+fun Button.enable(editText: EditText, method: () -> Boolean) {
+    val button = this
+    editText.addTextChangedListener(object : DefaultTextWatcher() {
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            super.onTextChanged(s, start, before, count)
+            button.isEnabled = method()
+        }
+    })
 }
